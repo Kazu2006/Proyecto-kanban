@@ -1,0 +1,8 @@
+:root { --bg:#fff; --txt:#000; }
+[data-theme="dark"] { --bg:#222; --txt:#eee; }
+body { margin:0; background:var(--bg); color:var(--txt); font-family:sans-serif;}
+.app header { display:flex; justify-content:space-between; padding:1rem; }
+.board { display:flex; gap:1rem; padding:1rem; }
+.column { flex:1; background:#f0f0f0; padding:1rem; border-radius:6px;}
+.column-cards { min-height:80px; }
+.card { background:#fff; margin-bottom:0.5rem; padding:0.5rem; border-radius:4px; }
