@@ -1,68 +1,158 @@
+/* ================================
+   1) Variables de color por tipo
+   ================================ */
 :root {
-  --bg: #fff;
-  --bg-secondary: #f9f9f9;
-  --text: #000;
-  --text-secondary: #555;
-  --primary: #007bff;
-  --link: #007bff;
-}
-[data-theme="dark"] {
-  --bg: #222;
-  --bg-secondary: #333;
-  --text: #eee;
-  --text-secondary: #bbb;
-  --primary: #66b2ff;
-  --link: #66b2ff;
-}
-
-
-
-/* Hero */
-.hero {
-  text-align: center;
-  padding: 4rem 1rem;
-}
-.hero h1 { font-size: 3rem; margin-bottom: .5rem; }
-.hero p { font-size: 1.2rem; color: var(--text-secondary); }
-.hero button {
-  margin-top: 1rem;
-  padding: .75rem 1.5rem;
-  border: none; border-radius: 6px; cursor: pointer;
+  --bg-grass:    #8BD369;
+  --bg-fire:     #FF9C54;
+  --bg-water:    #58ABF6;
+  --bg-electric: #F2CB55;
+  --bg-bug:      #8BD369;
+  --bg-normal:   #B5B9C4;
+  --bg-poison:   #9F6E97;
+  --bg-ground:   #F78551;
+  --bg-fairy:    #EBA8C3;
+  --bg-fighting:#EB4971;
+  --bg-psychic:  #FF6568;
+  --bg-rock:     #D4C294;
+  --bg-ghost:    #607DCA;
+  --bg-ice:      #91D8DF;
+  --bg-dragon:   #7383B9;
+  --bg-dark:     #6F6E78;
+  --bg-steel:    #4C91B2;
+  --bg-flying:   #748FC9;
 }
 
-/* Features */
-.features {
+/* ================================
+   2) Layout general
+   ================================ */
+body, html {
+  margin: 0;
+  padding: 0;
+  background: #121212;
+  color: #eee;
+  font-family: sans-serif;
+}
+
+.app {
   display: flex;
-  justify-content: space-around;
-  padding: 2rem 1rem;
+  flex-direction: column;
+  min-height: 100vh;
 }
-.features .icon { font-size: 2rem; }
-.features h3 { margin: .5rem 0; }
 
-/* Testimonials */
-.testimonials {
-  background: var(--bg-secondary);
-  padding: 2rem 1rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-.testimonials blockquote {
+/* ================================
+   3) Listado y buscador
+   ================================ */
+.pokemon-list {
+  flex: 1;
   padding: 1rem;
-  border-left: 4px solid var(--primary);
 }
 
-/* Footer */
-.footer {
+.search-input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.6rem 1rem;
+  margin: 0 auto 1.5rem;
+  display: block;
+  border: 2px solid #555;
+  border-radius: 2rem;
+  background: #222;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.search-input::placeholder {
+  color: #888;
+}
+
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+}
+
+.error {
+  color: #f55;
   text-align: center;
-  padding: 2rem 1rem;
-  background: var(--bg-secondary, #f9f9f9);
-  color: var(--text);
+  margin-top: 2rem;
 }
-.footer a {
-  color: var(--link, #007bff);
-  text-decoration: none;
+
+/* ==== Card estilo Pokémon GO ==== */
+/* ================================
+   Card estilo Pokémon GO
+   ================================ */
+.card {
+  position: relative;
+  width: 180px;
+  height: 240px;
+  background: #2a2a2a;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  transition: transform .2s;
 }
-.footer a:hover {
-  text-decoration: underline;
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* Círculo detrás de la imagen */
+.card-circle {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  top: 10px;
+  left: calc(50% - 70px);
+  z-index: 1;
+}
+
+/* Wrapper para centrar la imagen grande */
+.card-art-wrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Imagen oficial */
+.card-art {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* Número tintado arriba derecha */
+.card-number {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  z-index: 3;
+}
+
+/* Nombre en blanco, minúsculas, centrado */
+.card-title {
+  margin: 0.5rem 0 0.2rem;
+  color: #fff;
+  text-transform: lowercase;
+  font-size: 1rem;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Sprite pixel abajo derecha */
+.card-sprite {
+  width: 28px;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  z-index: 3;
 }
