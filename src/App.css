@@ -75,6 +75,20 @@ body, html {
   margin: 0;
   font-size: 2.5rem;
 }
+
+.header-sprites {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.sprite-icon {
+  width: 48px;
+  height: 48px;
+  image-rendering: pixelated;
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -496,14 +510,16 @@ body, html {
   pointer-events: none;
 }
 
-/* Sprite pixel abajo derecha */
+/* En tu App.css o PokemonCard.css */
 .card-sprite {
-  width: 28px;
   position: absolute;
   bottom: 8px;
   right: 8px;
-  z-index: 3;
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated; /* conserva estilo retro */
 }
+
 
 .card.fire:hover .card-circle {
   background-color: var(--neon-fire-h);
@@ -512,3 +528,61 @@ body, html {
   background-color: var(--neon-water-h);
 }
 /* …etc. */
+/* Píldora de tipo inferior izquierda */
+.pokemon-type-label {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.4); /* fondo oscuro semitransparente */
+  pointer-events: none;
+}
+
+/* Opcional: un toque de color según tipo, muy sutil */
+.pokemon-type-label.grass    { background-color: rgba(139,211,105,0.6); }
+.pokemon-type-label.fire     { background-color: rgba(255,156,84,0.6); }
+.pokemon-type-label.water    { background-color: rgba(88,171,246,0.6); }
+.pokemon-type-label.electric { background-color: rgba(242,203,85,0.6); }
+.pokemon-type-label.bug      { background-color: rgba(139,211,105,0.6); }
+.pokemon-type-label.normal   { background-color: rgba(181,185,196,0.6); }
+.pokemon-type-label.poison   { background-color: rgba(159,110,151,0.6); }
+.pokemon-type-label.ground   { background-color: rgba(247,133,81,0.6); }
+.pokemon-type-label.fairy    { background-color: rgba(235,168,195,0.6); }
+.pokemon-type-label.fighting { background-color: rgba(235,73,113,0.6); }
+.pokemon-type-label.psychic  { background-color: rgba(255,101,104,0.6); }
+.pokemon-type-label.rock     { background-color: rgba(212,194,148,0.6); }
+.pokemon-type-label.ghost    { background-color: rgba(96,125,202,0.6); }
+.pokemon-type-label.ice      { background-color: rgba(145,216,223,0.6); }
+.pokemon-type-label.dragon   { background-color: rgba(115,131,185,0.6); }
+.pokemon-type-label.dark     { background-color: rgba(111,110,120,0.6); }
+.pokemon-type-label.steel    { background-color: rgba(76,145,178,0.6); }
+.pokemon-type-label.flying   { background-color: rgba(116,143,201,0.6); }
+
+
+.pokemon-type-label {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: #fff;
+  pointer-events: none;
+}
+
+.type-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
