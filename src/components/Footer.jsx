@@ -7,7 +7,7 @@ export default function Footer() {
       <p>Hecho con ♥️ y React por [Fabricio Paolo Leiva Salazar]</p>
       <p>
         <a
-          href="https://github.com/tu-usuario/poke-catalog"
+          href="https://github.com/Kazu2006/Proyecto-kanban"
           target="_blank"
           rel="noreferrer"
         >

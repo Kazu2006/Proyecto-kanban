@@ -2,28 +2,55 @@
    1) Variables de color por tipo
    ================================ */
 :root {
-  --bg-grass:    #8BD369;
-  --bg-fire:     #FF9C54;
-  --bg-water:    #58ABF6;
-  --bg-electric: #F2CB55;
-  --bg-bug:      #8BD369;
-  --bg-normal:   #B5B9C4;
-  --bg-poison:   #9F6E97;
-  --bg-ground:   #F78551;
-  --bg-fairy:    #EBA8C3;
-  --bg-fighting:#EB4971;
-  --bg-psychic:  #FF6568;
-  --bg-rock:     #D4C294;
-  --bg-ghost:    #607DCA;
-  --bg-ice:      #91D8DF;
-  --bg-dragon:   #7383B9;
-  --bg-dark:     #6F6E78;
-  --bg-steel:    #4C91B2;
-  --bg-flying:   #748FC9;
+  --bg-grass:       #8BD369;
+  --bg-fire:        #FF9C54;
+  --bg-water:       #58ABF6;
+  --bg-electric:    #F2CB55;
+  --bg-bug:         #8BD369;
+  --bg-normal:      #B5B9C4;
+  --bg-poison:      #9F6E97;
+  --bg-ground:      #F78551;
+  --bg-fairy:       #EBA8C3;
+  --bg-fighting:    #EB4971;
+  --bg-psychic:     #FF6568;
+  --bg-rock:        #D4C294;
+  --bg-ghost:       #607DCA;
+  --bg-ice:         #91D8DF;
+  --bg-dragon:      #7383B9;
+  --bg-dark:        #6F6E78;
+  --bg-steel:       #4C91B2;
+  --bg-flying:      #748FC9;
+
+  /* Neones tenues (20% opacity) */
+  --neon-grass:     rgba(139,211,105,0.2);
+  --neon-fire:      rgba(255,156,84,0.2);
+  --neon-water:     rgba(88,171,246,0.2);
+  --neon-electric:  rgba(242,203,85,0.2);
+  --neon-bug:       rgba(139,211,105,0.2);
+  --neon-normal:    rgba(181,185,196,0.2);
+  --neon-poison:    rgba(159,110,151,0.2);
+  --neon-ground:    rgba(247,133,81,0.2);
+  --neon-fairy:     rgba(235,168,195,0.2);
+  --neon-fighting:  rgba(235,73,113,0.2);
+  --neon-psychic:   rgba(255,101,104,0.2);
+  --neon-rock:      rgba(212,194,148,0.2);
+  --neon-ghost:     rgba(96,125,202,0.2);
+  --neon-ice:       rgba(145,216,223,0.2);
+  --neon-dragon:    rgba(115,131,185,0.2);
+  --neon-dark:      rgba(111,110,120,0.2);
+  --neon-steel:     rgba(76,145,178,0.2);
+  --neon-flying:    rgba(116,143,201,0.2);
+
+  /* Neones intensificados para hover (40% opacity) */
+  --neon-grass-h:     rgba(139,211,105,0.4);
+  --neon-fire-h:      rgba(255,156,84,0.4);
+  --neon-water-h:     rgba(88,171,246,0.4);
+  --neon-electric-h:  rgba(242,203,85,0.4);
+  /* …añade para cada tipo según necesites… */
 }
 
 /* ================================
-   2) Layout general
+   2) Contenedor y Layout general
    ================================ */
 body, html {
   margin: 0;
@@ -32,7 +59,22 @@ body, html {
   color: #eee;
   font-family: sans-serif;
 }
-
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.header {
+  text-align: center;
+  padding: 2rem 0;
+}
+.header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
 .app {
   display: flex;
   flex-direction: column;
@@ -40,13 +82,12 @@ body, html {
 }
 
 /* ================================
-   3) Listado y buscador
+   3) Buscador y Grid
    ================================ */
 .pokemon-list {
   flex: 1;
   padding: 1rem;
 }
-
 .search-input {
   width: 100%;
   max-width: 400px;
@@ -59,11 +100,9 @@ body, html {
   color: #fff;
   font-size: 1rem;
 }
-
 .search-input::placeholder {
   color: #888;
 }
-
 .pokemon-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -71,15 +110,17 @@ body, html {
   justify-items: center;
 }
 
-.error {
-  color: #f55;
+/* ================================
+   4) Footer
+   ================================ */
+.footer {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: auto;
+  padding: 2rem 0;
 }
 
-/* ==== Card estilo Pokémon GO ==== */
 /* ================================
-   Card estilo Pokémon GO
+   5) Card estilo Pokémon GO mejorado
    ================================ */
 .card {
   position: relative;
@@ -88,7 +129,7 @@ body, html {
   background: #2a2a2a;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-  overflow: hidden;
+  overflow: visible; /* para que el glow no se corte */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,18 +140,33 @@ body, html {
   transform: translateY(-3px);
 }
 
-/* Círculo detrás de la imagen */
+/* Círculo detrás de la imagen con neón según tipo */
 .card-circle {
   position: absolute;
-  width: 140px;
-  height: 140px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  top: 10px;
-  left: calc(50% - 70px);
+  top: 50px;
+  left: calc(60% - 70px);
   z-index: 1;
+  /* Neón base con opacidad 50% para que destaque */
+  background-color: var(--neon-grass, rgba(139,211,105,0.5));
+  /* Resplandor alrededor */
+  box-shadow: 0 0 20px var(--neon-grass, rgba(139,211,105,0.5));
+  transition: all 0.3s ease;
 }
 
-/* Wrapper para centrar la imagen grande */
+
+
+/* Al hacer hover, intensificamos opacidad y resplandor */
+.card:hover .card-circle {
+  background-color: var(--neon-grass-h, rgba(139,211,105,0.8));
+  box-shadow: 0 0 30px var(--neon-grass-h, rgba(139,211,105,0.8));
+  transform: scale(1.05);
+}
+
+
+/* Wrapper para centrar la imagen grande sin animación extra */
 .card-art-wrapper {
   position: relative;
   width: 140px;
@@ -120,13 +176,305 @@ body, html {
   justify-content: center;
   align-items: center;
 }
-
 /* Imagen oficial */
 .card-art {
   width: 100px;
   height: 100px;
   object-fit: contain;
 }
+
+
+/* Ahora reglas por tipo para hover pulsante */
+.card.fire .card-circle {
+  background-color: rgba(255,156,84,0.5);
+  box-shadow: 0 0 20px rgba(255,156,84,0.5);
+}
+.card.fire:hover .card-circle {
+  background-color: rgba(255,156,84,0.8);
+  box-shadow: 0 0 30px rgba(255,156,84,0.8);
+}
+.card.water .card-circle {
+  background-color: rgba(88,171,246,0.5);
+  box-shadow: 0 0 20px rgba(88,171,246,0.5);
+}
+.card.water:hover .card-circle {
+  background-color: rgba(88,171,246,0.8);
+  box-shadow: 0 0 30px rgba(88,171,246,0.8);
+}
+
+.card.grass .card-circle {
+  background-color: rgba(139, 211, 105, 0.5);
+  box-shadow: 0 0 20px rgba(139, 211, 105, 0.5);
+}
+.card.grass:hover .card-circle {
+  background-color: rgba(139, 211, 105, 0.8);
+  box-shadow: 0 0 30px rgba(139, 211, 105, 0.8);
+}
+
+.card.electric .card-circle {
+  background-color: rgba(242, 203, 85, 0.5);
+  box-shadow: 0 0 20px rgba(242, 203, 85, 0.5);
+}
+.card.electric:hover .card-circle {
+  background-color: rgba(242, 203, 85, 0.8);
+  box-shadow: 0 0 30px rgba(242, 203, 85, 0.8);
+}
+
+.card.bug .card-circle {
+  background-color: rgba(139, 211, 105, 0.5);
+  box-shadow: 0 0 20px rgba(139, 211, 105, 0.5);
+}
+.card.bug:hover .card-circle {
+  background-color: rgba(139, 211, 105, 0.8);
+  box-shadow: 0 0 30px rgba(139, 211, 105, 0.8);
+}
+
+.card.normal .card-circle {
+  background-color: rgba(181, 185, 196, 0.5);
+  box-shadow: 0 0 20px rgba(181, 185, 196, 0.5);
+}
+.card.normal:hover .card-circle {
+  background-color: rgba(181, 185, 196, 0.8);
+  box-shadow: 0 0 30px rgba(181, 185, 196, 0.8);
+}
+
+.card.poison .card-circle {
+  background-color: rgba(159, 110, 151, 0.5);
+  box-shadow: 0 0 20px rgba(159, 110, 151, 0.5);
+}
+.card.poison:hover .card-circle {
+  background-color: rgba(159, 110, 151, 0.8);
+  box-shadow: 0 0 30px rgba(159, 110, 151, 0.8);
+}
+
+.card.ground .card-circle {
+  background-color: rgba(247, 133, 81, 0.5);
+  box-shadow: 0 0 20px rgba(247, 133, 81, 0.5);
+}
+.card.ground:hover .card-circle {
+  background-color: rgba(247, 133, 81, 0.8);
+  box-shadow: 0 0 30px rgba(247, 133, 81, 0.8);
+}
+
+.card.fairy .card-circle {
+  background-color: rgba(235, 168, 195, 0.5);
+  box-shadow: 0 0 20px rgba(235, 168, 195, 0.5);
+}
+.card.fairy:hover .card-circle {
+  background-color: rgba(235, 168, 195, 0.8);
+  box-shadow: 0 0 30px rgba(235, 168, 195, 0.8);
+}
+
+.card.fighting .card-circle {
+  background-color: rgba(235, 73, 113, 0.5);
+  box-shadow: 0 0 20px rgba(235, 73, 113, 0.5);
+}
+.card.fighting:hover .card-circle {
+  background-color: rgba(235, 73, 113, 0.8);
+  box-shadow: 0 0 30px rgba(235, 73, 113, 0.8);
+}
+
+.card.psychic .card-circle {
+  background-color: rgba(255, 101, 104, 0.5);
+  box-shadow: 0 0 20px rgba(255, 101, 104, 0.5);
+}
+.card.psychic:hover .card-circle {
+  background-color: rgba(255, 101, 104, 0.8);
+  box-shadow: 0 0 30px rgba(255, 101, 104, 0.8);
+}
+
+.card.rock .card-circle {
+  background-color: rgba(212, 194, 148, 0.5);
+  box-shadow: 0 0 20px rgba(212, 194, 148, 0.5);
+}
+.card.rock:hover .card-circle {
+  background-color: rgba(212, 194, 148, 0.8);
+  box-shadow: 0 0 30px rgba(212, 194, 148, 0.8);
+}
+
+.card.ghost .card-circle {
+  background-color: rgba(96, 125, 202, 0.5);
+  box-shadow: 0 0 20px rgba(96, 125, 202, 0.5);
+}
+.card.ghost:hover .card-circle {
+  background-color: rgba(96, 125, 202, 0.8);
+  box-shadow: 0 0 30px rgba(96, 125, 202, 0.8);
+}
+
+.card.ice .card-circle {
+  background-color: rgba(145, 216, 223, 0.5);
+  box-shadow: 0 0 20px rgba(145, 216, 223, 0.5);
+}
+.card.ice:hover .card-circle {
+  background-color: rgba(145, 216, 223, 0.8);
+  box-shadow: 0 0 30px rgba(145, 216, 223, 0.8);
+}
+
+.card.dragon .card-circle {
+  background-color: rgba(115, 131, 185, 0.5);
+  box-shadow: 0 0 20px rgba(115, 131, 185, 0.5);
+}
+.card.dragon:hover .card-circle {
+  background-color: rgba(115, 131, 185, 0.8);
+  box-shadow: 0 0 30px rgba(115, 131, 185, 0.8);
+}
+
+.card.dark .card-circle {
+  background-color: rgba(111, 110, 120, 0.5);
+  box-shadow: 0 0 20px rgba(111, 110, 120, 0.5);
+}
+.card.dark:hover .card-circle {
+  background-color: rgba(111, 110, 120, 0.8);
+  box-shadow: 0 0 30px rgba(111, 110, 120, 0.8);
+}
+
+.card.steel .card-circle {
+  background-color: rgba(76, 145, 178, 0.5);
+  box-shadow: 0 0 20px rgba(76, 145, 178, 0.5);
+}
+.card.steel:hover .card-circle {
+  background-color: rgba(76, 145, 178, 0.8);
+  box-shadow: 0 0 30px rgba(76, 145, 178, 0.8);
+}
+
+.card.flying .card-circle {
+  background-color: rgba(116, 143, 201, 0.5);
+  box-shadow: 0 0 20px rgba(116, 143, 201, 0.5);
+}
+.card.flying:hover .card-circle {
+  background-color: rgba(116, 143, 201, 0.8);
+  box-shadow: 0 0 30px rgba(116, 143, 201, 0.8);
+}
+
+
+/* ===== Neón para nombre y tipo segun mainType ===== */
+.card.fire .pokemon-name,
+.card.fire .pokemon-type {
+  color: #FF9C54;
+  text-shadow: 0 0 8px rgba(255,156,84,0.9),
+               0 0 16px rgba(255,156,84,0.7);
+}
+
+.card.water .pokemon-name,
+.card.water .pokemon-type {
+  color: #58ABF6;
+  text-shadow: 0 0 8px rgba(88,171,246,0.9),
+               0 0 16px rgba(88,171,246,0.7);
+}
+
+.card.grass .pokemon-name,
+.card.grass .pokemon-type {
+  color: #8BD369;
+  text-shadow: 0 0 8px rgba(139,211,105,0.9),
+               0 0 16px rgba(139,211,105,0.7);
+}
+
+.card.electric .pokemon-name,
+.card.electric .pokemon-type {
+  color: #F2CB55;
+  text-shadow: 0 0 8px rgba(242,203,85,0.9),
+               0 0 16px rgba(242,203,85,0.7);
+}
+
+.card.bug .pokemon-name,
+.card.bug .pokemon-type {
+  color: #8BD369;
+  text-shadow: 0 0 8px rgba(139,211,105,0.9),
+               0 0 16px rgba(139,211,105,0.7);
+}
+
+.card.normal .pokemon-name,
+.card.normal .pokemon-type {
+  color: #B5B9C4;
+  text-shadow: 0 0 8px rgba(181,185,196,0.9),
+               0 0 16px rgba(181,185,196,0.7);
+}
+
+.card.poison .pokemon-name,
+.card.poison .pokemon-type {
+  color: #9F6E97;
+  text-shadow: 0 0 8px rgba(159,110,151,0.9),
+               0 0 16px rgba(159,110,151,0.7);
+}
+
+.card.ground .pokemon-name,
+.card.ground .pokemon-type {
+  color: #F78551;
+  text-shadow: 0 0 8px rgba(247,133,81,0.9),
+               0 0 16px rgba(247,133,81,0.7);
+}
+
+.card.fairy .pokemon-name,
+.card.fairy .pokemon-type {
+  color: #EBA8C3;
+  text-shadow: 0 0 8px rgba(235,168,195,0.9),
+               0 0 16px rgba(235,168,195,0.7);
+}
+
+.card.fighting .pokemon-name,
+.card.fighting .pokemon-type {
+  color: #EB4971;
+  text-shadow: 0 0 8px rgba(235,73,113,0.9),
+               0 0 16px rgba(235,73,113,0.7);
+}
+
+.card.psychic .pokemon-name,
+.card.psychic .pokemon-type {
+  color: #FF6568;
+  text-shadow: 0 0 8px rgba(255,101,104,0.9),
+               0 0 16px rgba(255,101,104,0.7);
+}
+
+.card.rock .pokemon-name,
+.card.rock .pokemon-type {
+  color: #D4C294;
+  text-shadow: 0 0 8px rgba(212,194,148,0.9),
+               0 0 16px rgba(212,194,148,0.7);
+}
+
+.card.ghost .pokemon-name,
+.card.ghost .pokemon-type {
+  color: #607DCA;
+  text-shadow: 0 0 8px rgba(96,125,202,0.9),
+               0 0 16px rgba(96,125,202,0.7);
+}
+
+.card.ice .pokemon-name,
+.card.ice .pokemon-type {
+  color: #91D8DF;
+  text-shadow: 0 0 8px rgba(145,216,223,0.9),
+               0 0 16px rgba(145,216,223,0.7);
+}
+
+.card.dragon .pokemon-name,
+.card.dragon .pokemon-type {
+  color: #7383B9;
+  text-shadow: 0 0 8px rgba(115,131,185,0.9),
+               0 0 16px rgba(115,131,185,0.7);
+}
+
+.card.dark .pokemon-name,
+.card.dark .pokemon-type {
+  color: #6F6E78;
+  text-shadow: 0 0 8px rgba(111,110,120,0.9),
+               0 0 16px rgba(111,110,120,0.7);
+}
+
+.card.steel .pokemon-name,
+.card.steel .pokemon-type {
+  color: #4C91B2;
+  text-shadow: 0 0 8px rgba(76,145,178,0.9),
+               0 0 16px rgba(76,145,178,0.7);
+}
+
+.card.flying .pokemon-name,
+.card.flying .pokemon-type {
+  color: #748FC9;
+  text-shadow: 0 0 8px rgba(116,143,201,0.9),
+               0 0 16px rgba(116,143,201,0.7);
+}
+
+
 
 /* Número tintado arriba derecha */
 .card-number {
@@ -156,3 +504,11 @@ body, html {
   right: 8px;
   z-index: 3;
 }
+
+.card.fire:hover .card-circle {
+  background-color: var(--neon-fire-h);
+}
+.card.water:hover .card-circle {
+  background-color: var(--neon-water-h);
+}
+/* …etc. */
